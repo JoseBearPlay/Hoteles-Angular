@@ -1,0 +1,172 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="d-grid gap-2 d-md-block">
+        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAgregarEvento">
+          <i class="bi bi-plus-square"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <button style="float: right" type="button" class="btn btn-light btn-sm" id="dropdownSettings"
+    data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="bi bi-three-dots-vertical"></i>
+  </button>
+  </div>
+
+
+  <div class="modal fade" id="modalAgregarEvento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Agregar Reservacion</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="inputFechaEntrada" class="form-label">Fecha de Entrada</label>
+              <input type="text" class="form-control" id="inputFechaEntrada" name="fechaEntrada" #fechaEntrada="ngModel"
+              [(ngModel)]="reservacionModel.entrada">
+            </div>
+            <div class="mb-3">
+              <label for="inputFechaSalida" class="form-label">Fecha de Salida</label>
+              <input type="text" class="form-control" id="inputTipoEvento" name="tipoeEvento"
+              #tipoEvento="ngModel" [(ngModel)]="reservacionModel.salida">
+            </div>
+            <div class="mb-3">
+              <label for="inputAcompañantes" class="form-label">Numero de Acompañantes</label>
+              <input type="text" class="form-control" id="inputAcompañantes" name="acompañantes"
+              #acompañantes="ngModel" [(ngModel)]="reservacionModel.visitantes">
+            </div>
+          </form>
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="agregarReservacion()">Agregar Reservacion</button>
+      </div>
+    </div>
+  </div>
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Fecha llegada</th>
+        <th scope="col">Fecha de Salida</th>
+        <th scope="col">Visitantes</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reser of reservacionList">
+        <th scope="row">{{reser._id}}</th>
+        <td>{{reser.entrada}}</td>
+        <td>{{reser.salida}}</td>
+        <td>{{reser.visitantes}}</td>
+      <td>
+        <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalEditarEvento"
+        (click)="obtenerReservacionID(reser._id)">Editar</button>
+        <button type="button" class="btn btn-primary"data-bs-toggle="modal" data-bs-target="#modalEliminarEvento"
+        (click)="obtenerReservacionID(reser._id)">Eliminar</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalVerEvento"
+        (click)="obtenerReservacionID(reser._id)">Ver</button>
+        </div>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <!-- Modal Editar Reservacion -->
+<div class="modal fade" id="modalEditarEvento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Evento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputFechaEntrada" class="form-label">Fecha de Entrada</label>
+            <input type="text" class="form-control" id="inputFechaEntrada" name="fechaEntrada" #fechaEntrada="ngModel"
+            [(ngModel)]="reservacionModel.entrada">
+          </div>
+          <div class="mb-3">
+            <label for="inputFechaSalida" class="form-label">Fecha de Salida</label>
+            <input type="text" class="form-control" id="inputTipoEvento" name="tipoeEvento"
+            #tipoEvento="ngModel" [(ngModel)]="reservacionModel.salida">
+          </div>
+          <div class="mb-3">
+            <label for="inputAcompañantes" class="form-label">Numero de Acompañantes</label>
+            <input type="text" class="form-control" id="inputAcompañantes" name="acompañantes"
+            #acompañantes="ngModel" [(ngModel)]="reservacionModel.visitantes">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+        (click)="editarReservacion()">Editar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Ver Evento -->
+<div class="modal fade" id="modalVerEvento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ver Evento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputFechaEntrada" class="form-label">Fecha de Entrada</label>
+            <input type="text" class="form-control" id="inputFechaEntrada" name="fechaEntrada" #fechaEntrada="ngModel"
+            [(ngModel)]="reservacionModel.entrada" disabled>
+          </div>
+          <div class="mb-3">
+            <label for="inputFechaSalida" class="form-label">Fecha de Salida</label>
+            <input type="text" class="form-control" id="inputTipoEvento" name="tipoeEvento"
+            #tipoEvento="ngModel" [(ngModel)]="reservacionModel.salida" disabled>
+          </div>
+          <div class="mb-3">
+            <label for="inputAcompañantes" class="form-label">Numero de Acompañantes</label>
+            <input type="text" class="form-control" id="inputAcompañantes" name="acompañantes"
+            #acompañantes="ngModel" [(ngModel)]="reservacionModel.visitantes" disabled>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Eliminar Reservacion -->
+<div class="modal fade" id="modalEliminarEvento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar Evento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Esta seguro de eliminar el Usuario: {{ reservacionModel.entrada}}?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+        (click)="eliminarReservacion(reservacionModel._id)">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+

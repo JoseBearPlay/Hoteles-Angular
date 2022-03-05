@@ -1,0 +1,34 @@
+<div class="container px-4 py-5 mx-auto">
+  <div class="card card0">
+      <div class="d-flex flex-lg-row flex-column-reverse">
+          <div class="card card1">
+              <div class="row justify-content-center my-auto">
+                  <div class="col-md-8 col-10 my-5">
+                      <div class="row justify-content-center px-3 mb-3"> <img id="logo" src="https://img.freepik.com/vector-gratis/fondo-plano-edificio-hotel_23-2148146118.jpg?size=338&ext=jpg&ga=GA1.2.1950443642.1616284800"> </div>
+                      <h6 class="msg-info">Ingresa Tus datos</h6>
+                      <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        name="email" #email="ngModel" [(ngModel)]="usuarioModel.email">
+                        <div id="emailHelp" class="form-text">No olvides tus credenciales.</div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1"
+                        name="password" #password="ngModel" [(ngModel)]="usuarioModel.password">
+                      </div>
+                      <div class="row justify-content-center my-3 px-3"> <button class="btn-block btn-color" type="submit" (click)="login()">Ingresar</button> </div>
+                  </div>
+              </div>
+              <div class="bottom text-center mb-5">
+                  <p href="#" class="sm-text mx-auto mb-3">No tiene Cuenta?</p><a href="http://localhost:4200/registro"><button class="btn btn-white ml-2">Create Una Aqui</button></a>
+              </div>
+          </div>
+          <div class="card card2">
+              <div class="my-auto mx-md-5 px-md-5 right">
+                  <h3 class="text-white">Aplicacion Gestora de Hoteles</h3> <small class="text-white">Buscar la comodidad de tus vaciones es nuestro deber</small>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

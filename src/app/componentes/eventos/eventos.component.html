@@ -1,0 +1,196 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="d-grid gap-2 d-md-block">
+        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAgregarEvento">
+          <i class="bi bi-plus-square"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <button style="float: right" type="button" class="btn btn-light btn-sm" id="dropdownSettings"
+    data-bs-toggle="dropdown" aria-expanded="false">
+  </button>
+  </div>
+
+
+
+  <div class="container">
+    <div class="row">
+    <div class="col-xs-2">
+    <br/>
+    <label>Buscar Eventos de Hotel</label>
+    <input class="typeahead form-control" type="search" placeholder="Search Name...."><br>
+    <button type="submit" class="btn btn-primary" (click)="buscarEventoNombre(eventoModel.hotel)">Buscar Evento</button>
+    </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="modalAgregarEvento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Agregar Evento</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="inputNombreEvento" class="form-label">Nombre evento</label>
+              <input type="text" class="form-control" id="inputNombreEvento" name="nombre" #nomre="ngModel"
+              [(ngModel)]="eventoModel.nombre">
+            </div>
+            <div class="mb-3">
+              <label for="inputTipoEvento" class="form-label">Tipo de Evento</label>
+              <input type="text" class="form-control" id="inputTipoEvento" name="tipoeEvento"
+              #tipoEvento="ngModel" [(ngModel)]="eventoModel.tipoEvento">
+            </div>
+            <div class="mb-3">
+              <label for="inputDescripcionEvento" class="form-label">Descripcion del Evento</label>
+              <input type="text" class="form-control" id="inputDescripcionEvento" name="descripcion"
+              #descripcion="ngModel" [(ngModel)]="eventoModel.descripcion">
+            </div>
+          </form>
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="agregarEvento()">Agregar Evento</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nombre del Evento</th>
+        <th scope="col">Tipo de Evento</th>
+        <th scope="col">Descripcion del Evento</th>
+        <th scope="col">Hotel</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let even of eventosList">
+        <th scope="row">{{even._id}}</th>
+        <td>{{even.nombre}}</td>
+        <td>{{even.tipoEvento}}</td>
+        <td>{{even.descripcion}}</td>
+        <td>{{even.hotel}}</td>
+      <td>
+        <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalEditarEvento"
+        (click)="obtenerEvento(even._id)">Editar</button>
+        <button type="button" class="btn btn-primary"data-bs-toggle="modal" data-bs-target="#modalEliminarEvento"
+        (click)="obtenerEvento(even._id)">Eliminar</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalVerEvento"
+        (click)="obtenerEvento(even._id)">Ver</button>
+        </div>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+<!-- Modal Editar Evento -->
+<div class="modal fade" id="modalEditarEvento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Evento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputEvento" class="form-label">Nombre Evento</label>
+            <input type="text" class="form-control" id="inputEvento" name="nombreEvento" #email="ngModel"
+            [(ngModel)]="eventoModel.nombre">
+          </div>
+          <div class="mb-3">
+            <label for="inputTipoEvento" class="form-label">Tipo de Evento</label>
+            <input type="text" class="form-control" id="inputTipoEvento" name="tipoEvento" #username="ngModel"
+            [(ngModel)]="eventoModel.tipoEvento">
+          </div>
+          <div class="mb-3">
+            <label for="inputDescripcionEvento" class="form-label">Descripcion del Evento</label>
+            <input type="text" class="form-control" id="inputDescripcionEvento" name="descripcionEvento" #nombre="ngModel"
+            [(ngModel)]="eventoModel.descripcion">
+          </div>
+          <div class="mb-3">
+            <label for="inputHotel" class="form-label">Nombre del Hotel</label>
+            <input type="text" class="form-control" id="inputHotel" name="hotel" #hotel="ngModel"
+            [(ngModel)]="eventoModel.hotel">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+        (click)="editarEvento()">Editar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Ver Evento -->
+<div class="modal fade" id="modalVerEvento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ver Evento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputEvento" class="form-label">Nombre Evento</label>
+            <input type="text" class="form-control" id="inputText" name="nombreEvento" #email="ngModel"
+            [(ngModel)]="eventoModel.nombre" disabled>
+          </div>
+          <div class="mb-3">
+            <label for="inputTipoEvento" class="form-label">Tipo de Evento</label>
+            <input type="text" class="form-control" id="inputTipoEvento" name="tipoEvento" #username="ngModel"
+            [(ngModel)]="eventoModel.tipoEvento" disabled>
+          </div>
+          <div class="mb-3">
+            <label for="inputDescripcionEvento" class="form-label">Descripcion del Evento</label>
+            <input type="text" class="form-control" id="inputDescripcionEvento" name="descripcionEvento" #nombre="ngModel"
+            [(ngModel)]="eventoModel.descripcion" disabled>
+          </div>
+          <div class="mb-3">
+            <label for="inputHotelEvento" class="form-label">Nombre del Hotel</label>
+            <input type="text" class="form-control" id="inputHotelEvento" name="hotel" #hotel="ngModel"
+            [(ngModel)]="eventoModel.hotel" disabled>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Eliminar Evento -->
+<div class="modal fade" id="modalEliminarEvento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar Evento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Esta seguro de eliminar el Usuario: {{ eventoModel.nombre }}?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+        (click)="eliminarEvento(eventoModel._id)">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>

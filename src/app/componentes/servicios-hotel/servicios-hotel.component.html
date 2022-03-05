@@ -1,0 +1,149 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="d-grid gap-2 d-md-block">
+        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAgregarEvento">
+          <i class="bi bi-plus-square"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <button style="float: right" type="button" class="btn btn-light btn-sm" id="dropdownSettings"
+    data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="bi bi-three-dots-vertical"></i>
+  </button>
+  </div>
+
+  <div class="modal fade" id="modalAgregarEvento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Agregar Servicio</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="inputNombreServicio" class="form-label">Nombre del servicio</label>
+              <input type="text" class="form-control" id="inputNombreServicio" name="nombreServicio" #nomre="ngModel"
+              [(ngModel)]="servicioModel.nombre">
+            </div>
+            <div class="mb-3">
+              <label for="inputDescripcionServicio" class="form-label">Descripcion del servicio</label>
+              <input type="text" class="form-control" id="inputDescripcionServicio" name="descripcionServicio"
+              #tipoEvento="ngModel" [(ngModel)]="servicioModel.descripcion">
+            </div>
+          </form>
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="agregarServicio()">Agregar Servicio</button>
+      </div>
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nombre del Servicio</th>
+        <th scope="col">Descripcion del Servicio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let serv of serviciosList">
+        <th scope="row">{{serv._id}}</th>
+        <td>{{serv.nombre}}</td>
+        <td>{{serv.descripcion}}</td>
+      <td>
+        <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalEditarServicio"
+        (click)="obtenerServicio(serv._id)">Editar</button>
+        <button type="button" class="btn btn-primary"data-bs-toggle="modal" data-bs-target="#modalEliminarServicio"
+        (click)="obtenerServicio(serv._id)">Eliminar</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalVerEvento"
+        (click)="obtenerServicio(serv._id)">Ver</button>
+        </div>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal Editar Servicio -->
+  <div class="modal fade" id="modalEditarServicio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Servicio</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputEvento" class="form-label">Nombre del Servicio</label>
+            <input type="text" class="form-control" id="inputText" name="nombreEvento" #email="ngModel"
+            [(ngModel)]="servicioModel.nombre">
+          </div>
+          <div class="mb-3">
+            <label for="inputTipoEvento" class="form-label">Descripcion del Servicio</label>
+            <input type="text" class="form-control" id="inputTipoEvento" name="tipoEvento" #username="ngModel"
+            [(ngModel)]="servicioModel.descripcion">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+        (click)="editarServicio()">Editar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Ver Servicio -->
+<div class="modal fade" id="modalVerEvento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ver Servicio</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputEvento" class="form-label">Nombre del Servicio</label>
+            <input type="text" class="form-control" id="inputText" name="nombreEvento" #email="ngModel"
+            [(ngModel)]="servicioModel.nombre" disabled>
+          </div>
+          <div class="mb-3">
+            <label for="inputTipoEvento" class="form-label">Descripcion del Servicio</label>
+            <input type="text" class="form-control" id="inputTipoEvento" name="tipoEvento" #username="ngModel"
+            [(ngModel)]="servicioModel.descripcion" disabled>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Eliminar Usuario -->
+<div class="modal fade" id="modalEliminarServicio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar Evento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Esta seguro de eliminar el Usuario: {{ servicioModel.nombre }}?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+        (click)="eliminarServicio(servicioModel._id)">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>

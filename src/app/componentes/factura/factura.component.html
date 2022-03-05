@@ -1,0 +1,307 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="d-grid gap-2 d-md-block">
+        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAgregarEvento">
+          <i class="bi bi-plus-square"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <button style="float: right" type="button" class="btn btn-light btn-sm" id="dropdownSettings"
+    data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="bi bi-three-dots-vertical"></i>
+  </button>
+  </div>
+
+
+  <div class="modal fade" id="modalAgregarEvento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Agregar Factura</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="inputNombreHotel" class="form-label">Nombre del Hotel</label>
+              <input type="text" class="form-control" id="inputNombreHotel" name="nombre" #nomre="ngModel"
+              [(ngModel)]="facturaModel.nombreHotel">
+            </div>
+            <div class="mb-3">
+              <label for="inputDireccionHotel" class="form-label">Direecion del Hotel</label>
+              <input type="text" class="form-control" id="inputDireccionHotel" name="direccionHotel"
+              #direccionHotel="ngModel" [(ngModel)]="facturaModel.direccionHotel">
+            </div>
+            <div class="mb-3">
+              <label for="inputNombreUsuario" class="form-label">Nombre de Usuario</label>
+              <input type="text" class="form-control" id="inputNombreUsuario" name="nombreUsuario"
+              #nombreUsuario="ngModel" [(ngModel)]="facturaModel.nombreUsuario">
+            </div>
+            <div class="mb-3">
+              <label for="inputFecha" class="form-label">Fecha</label>
+              <input type="date" class="form-control" id="inputFecha" name="fecha"
+              #fecha="ngModel" [(ngModel)]="facturaModel.fecha">
+            </div>
+            <div class="mb-3">
+              <label for="inputNumeroFactura" class="form-label">Numero de Factura</label>
+              <input type="text" class="form-control" id="inputNumeroFactura" name="numeroFactura"
+              #numeroFactura="ngModel" [(ngModel)]="facturaModel.numeroFactura">
+            </div>
+            <div class="mb-3">
+              <label for="inputSerie" class="form-label">Serie</label>
+              <input type="text" class="form-control" id="inputSerie" name="serie"
+              #serie="ngModel" [(ngModel)]="facturaModel.serie">
+            </div>
+            <div class="mb-3">
+              <label for="inputServicioHospedaje" class="form-label">Servicios de Hospedaje</label>
+              <input type="text" class="form-control" id="inputServicioHospedaje" name="serviciosHospedado"
+              #serviciosHospedado="ngModel" [(ngModel)]="facturaModel.serviciosHospedado">
+            </div>
+            <div class="mb-3">
+              <label for="inputPrecioServicio" class="form-label">Precios de Servicios</label>
+              <input type="text" class="form-control" id="inputPrecioServicio" name="precioServicios"
+              #precioServicios="ngModel" [(ngModel)]="facturaModel.precioServicios">
+            </div>
+            <div class="mb-3">
+              <label for="inputPrecioHospedaje" class="form-label">Precio de Hospedaje</label>
+              <input type="text" class="form-control" id="inputPrecioHospedaje" name="precioHospedaje"
+              #precioHospedaje="ngModel" [(ngModel)]="facturaModel.precioHospedaje">
+            </div>
+            <div class="mb-3">
+              <label for="inputDiasHospedado" class="form-label">Dias Hospedado</label>
+              <input type="text" class="form-control" id="inputDiasHospedado" name="diasHospedado"
+              #diasHospedado="ngModel" [(ngModel)]="facturaModel.diasHospedado">
+            </div>
+            <div class="mb-3">
+              <label for="inputTotal" class="form-label">Total Factura</label>
+              <input type="text" class="form-control" id="inputTotal" name="total"
+              #total="ngModel" [(ngModel)]="facturaModel.total">
+            </div>
+          </form>
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="agregarFactura()">Agregar Evento</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ------------------------------------------------------------------------------------------------------------>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nombre del Hotel</th>
+        <th scope="col">Direccion del Hotel</th>
+        <th scope="col">Nombre de Usuario</th>
+        <th scope="col">fecha</th>
+        <th scope="col">Nuemero de Factura</th>
+        <th scope="col">Serie</th>
+        <th scope="col">Servicios de Hospedaje</th>
+        <th scope="col">Precios de Servicios</th>
+        <th scope="col">Precios de Hospedaje</th>
+        <th scope="col">Dias Hospedado</th>
+        <th scope="col">Total Factura</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fac of facturaList">
+        <th scope="row">{{fac._id}}</th>
+        <td>{{fac.nombreHotel}}</td>
+        <td>{{fac.direccionHotel}}</td>
+        <td>{{fac.nombreUsuario}}</td>
+        <td>{{fac.fecha}}</td>
+        <td>{{fac.numeroFactura}}</td>
+        <td>{{fac.serie}}</td>
+        <td>{{fac.serviciosHospedado}}</td>
+        <td>{{fac.precioServicios}}</td>
+        <td>{{fac.precioHospedaje}}</td>
+        <td>{{fac.diasHospedado}}</td>
+        <td>{{fac.total}}</td>
+
+      <td>
+        <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalEditarEvento"
+        (click)="obtenerFacturaID(fac._id)">Editar</button>
+        <button type="button" class="btn btn-primary"data-bs-toggle="modal" data-bs-target="#modalEliminarEvento"
+        (click)="obtenerFacturaID(fac._id)">Eliminar</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalVerEvento"
+        (click)="obtenerFacturaID(fac._id)">Ver</button>
+        </div>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <!-- Modal Editar Factura-->
+<div class="modal fade" id="modalEditarEvento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Evento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputNombreHotel" class="form-label">Nombre del Hotel</label>
+            <input type="text" class="form-control" id="inputNombreHotel" name="nombre" #nomre="ngModel"
+            [(ngModel)]="facturaModel.nombreHotel">
+          </div>
+          <div class="mb-3">
+            <label for="inputDireccionHotel" class="form-label">Direecion del Hotel</label>
+            <input type="text" class="form-control" id="inputDireccionHotel" name="direccionHotel"
+            #direccionHotel="ngModel" [(ngModel)]="facturaModel.direccionHotel">
+          </div>
+          <div class="mb-3">
+            <label for="inputNombreUsuario" class="form-label">Nombre de Usuario</label>
+            <input type="text" class="form-control" id="inputNombreUsuario" name="nombreUsuario"
+            #nombreUsuario="ngModel" [(ngModel)]="facturaModel.nombreUsuario">
+          </div>
+          <div class="mb-3">
+            <label for="inputFecha" class="form-label">Fecha</label>
+            <input type="date" class="form-control" id="inputFecha" name="fecha"
+            #fecha="ngModel" [(ngModel)]="facturaModel.fecha">
+          </div>
+          <div class="mb-3">
+            <label for="inputNumeroFactura" class="form-label">Numero de Factura</label>
+            <input type="text" class="form-control" id="inputNumeroFactura" name="numeroFactura"
+            #numeroFactura="ngModel" [(ngModel)]="facturaModel.numeroFactura">
+          </div>
+          <div class="mb-3">
+            <label for="inputSerie" class="form-label">Serie</label>
+            <input type="text" class="form-control" id="inputSerie" name="serie"
+            #serie="ngModel" [(ngModel)]="facturaModel.serie">
+          </div>
+          <div class="mb-3">
+            <label for="inputServicioHospedaje" class="form-label">Servicios de Hospedaje</label>
+            <input type="text" class="form-control" id="inputServicioHospedaje" name="serviciosHospedado"
+            #serviciosHospedado="ngModel" [(ngModel)]="facturaModel.serviciosHospedado">
+          </div>
+          <div class="mb-3">
+            <label for="inputPrecioServicio" class="form-label">Precios de Servicios</label>
+            <input type="text" class="form-control" id="inputPrecioServicio" name="precioServicios"
+            #precioServicios="ngModel" [(ngModel)]="facturaModel.precioServicios">
+          </div>
+          <div class="mb-3">
+            <label for="inputPrecioHospedaje" class="form-label">Precio de Hospedaje</label>
+            <input type="text" class="form-control" id="inputPrecioHospedaje" name="precioHospedaje"
+            #precioHospedaje="ngModel" [(ngModel)]="facturaModel.precioHospedaje">
+          </div>
+          <div class="mb-3">
+            <label for="inputDiasHospedado" class="form-label">Dias Hospedado</label>
+            <input type="text" class="form-control" id="inputDiasHospedado" name="diasHospedado"
+            #diasHospedado="ngModel" [(ngModel)]="facturaModel.diasHospedado">
+          </div>
+          <div class="mb-3">
+            <label for="inputTotal" class="form-label">Total Factura</label>
+            <input type="text" class="form-control" id="inputTotal" name="total"
+            #total="ngModel" [(ngModel)]="facturaModel.total">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+        (click)="editarFactura()">Editar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Ver Factura -->
+<div class="modal fade" id="modalVerEvento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ver Evento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputNombreHotel" class="form-label">Nombre del Hotel</label>
+            <input type="text" class="form-control" id="inputNombreHotel" name="nombre" #nomre="ngModel"
+            [(ngModel)]="facturaModel.nombreHotel" disabled>
+          </div>
+          <div class="mb-3">
+            <label for="inputDireccionHotel" class="form-label">Direecion del Hotel</label>
+            <input type="text" class="form-control" id="inputDireccionHotel" name="direccionHotel"
+            #direccionHotel="ngModel" [(ngModel)]="facturaModel.direccionHotel" disabled>
+          </div>
+          <div class="mb-3">
+            <label for="inputNombreUsuario" class="form-label">Nombre de Usuario</label>
+            <input type="text" class="form-control" id="inputNombreUsuario" name="nombreUsuario"
+            #nombreUsuario="ngModel" [(ngModel)]="facturaModel.nombreUsuario" disabled>
+          </div>
+          <div class="mb-3">
+            <label for="inputFecha" class="form-label">Fecha</label>
+            <input type="text" class="form-control" id="inputFecha" name="fecha"
+            #fecha="ngModel" [(ngModel)]="facturaModel.fecha" disabled>
+          </div>
+          <div class="mb-3">
+            <label for="inputNumeroFactura" class="form-label">Numero de Factura</label>
+            <input type="text" class="form-control" id="inputNumeroFactura" name="numeroFactura"
+            #numeroFactura="ngModel" [(ngModel)]="facturaModel.numeroFactura" disabled>
+          </div>
+          <div class="mb-3">
+            <label for="inputSerie" class="form-label">Serie</label>
+            <input type="text" class="form-control" id="inputSerie" name="serie"
+            #serie="ngModel" [(ngModel)]="facturaModel.serie" disabled>
+          </div>
+          <div class="mb-3">
+            <label for="inputServicioHospedaje" class="form-label">Servicios de Hospedaje</label>
+            <input type="text" class="form-control" id="inputServicioHospedaje" name="serviciosHospedado"
+            #serviciosHospedado="ngModel" [(ngModel)]="facturaModel.serviciosHospedado" disabled>
+          </div>
+          <div class="mb-3">
+            <label for="inputPrecioServicio" class="form-label">Precios de Servicios</label>
+            <input type="text" class="form-control" id="inputPrecioServicio" name="precioServicios"
+            #precioServicios="ngModel" [(ngModel)]="facturaModel.precioServicios" disabled>
+          </div>
+          <div class="mb-3">
+            <label for="inputPrecioHospedaje" class="form-label">Precio de Hospedaje</label>
+            <input type="text" class="form-control" id="inputPrecioHospedaje" name="precioHospedaje"
+            #precioHospedaje="ngModel" [(ngModel)]="facturaModel.precioHospedaje" disabled>
+          </div>
+          <div class="mb-3">
+            <label for="inputDiasHospedado" class="form-label">Dias Hospedado</label>
+            <input type="text" class="form-control" id="inputDiasHospedado" name="diasHospedado"
+            #diasHospedado="ngModel" [(ngModel)]="facturaModel.diasHospedado" disabled>
+          </div>
+          <div class="mb-3">
+            <label for="inputTotal" class="form-label">Total Factura</label>
+            <input type="text" class="form-control" id="inputTotal" name="total"
+            #total="ngModel" [(ngModel)]="facturaModel.total" disabled>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Eliminar Factura -->
+<div class="modal fade" id="modalEliminarEvento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar Evento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Esta seguro de eliminar el Usuario: {{ facturaModel.nombreUsuario }}?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+        (click)="eliminarFactura(facturaModel._id)">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>

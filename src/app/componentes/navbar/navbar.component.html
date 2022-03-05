@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Hoteles</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/login' routerLinkActive='active'>Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/registro' routerLinkActive='active'>Registros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/usuarios' routerLinkActive='active'>Usuarios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/hotel' routerLinkActive='active'>Hoteles</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/eventos' routerLinkActive='active'>Eventos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/servicio-hotel' routerLinkActive='active'>Servicios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/habitaciones' routerLinkActive='active'>Habitaciones</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/reservacion' routerLinkActive='active'>Reservaciones</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/factura' routerLinkActive='active'>Factura</a>
+        </li>
+
+      </ul>
+      <div class="d-flex" *ngIf="_usuarioService.obtenerIdentidad()">
+        <img *ngIf="_usuarioService.obtenerIdentidad().imagen" [src]="_usuarioService.obtenerIdentidad().imagen" class="user-image">
+        <img *ngIf="_usuarioService.obtenerIdentidad().imagen === null" src="/assets/programmer.png" class="user-image">
+        <a class="nav-link">{{ _usuarioService.obtenerIdentidad().username }}</a>
+      </div>
+    </div>
+  </div>
+</nav>
