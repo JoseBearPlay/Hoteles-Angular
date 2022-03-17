@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-navbar',
@@ -17,7 +18,17 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.identidad);
+  }
 
+  logout(){
+    localStorage.clear()
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Se cerro sesion',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 
 }
